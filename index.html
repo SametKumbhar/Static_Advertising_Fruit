@@ -134,6 +134,20 @@
             padding: 20px;
         }
     </style>
+    <script>
+let currentVersion = null;
+
+setInterval(async () => {
+    const response = await fetch('/version.txt?time=' + Date.now());
+    const newVersion = await response.text();
+
+    if (currentVersion === null) {
+        currentVersion = newVersion;
+    } else if (currentVersion !== newVersion) {
+        location.reload();
+    }
+}, 5000);
+</script>
 </head>
 
 <body>
